@@ -19,24 +19,18 @@ namespace EjercicioUno
             string content;
             content = downloader.Download();
 
-            HTMLReader reader = new HTMLReader(content);
-            reader.AdjustText();
+            IHTMLBuilder ihtmlbuilder = new HTMLBuilder(content);
         
-            HTML html = new HTML(reader.text);
-            html.TagCreator();
-            html.AtributeCreator();
+            HTML html = ihtmlbuilder.BuildHTML();
         
-            foreach(Tag item in html.Tags)
+            foreach(string item in html.ListOfTags())
             {
-                System.Console.WriteLine(item.Name);
+                System.Console.WriteLine(item);
             }
-            foreach(Attribute item in html.Attributes)
+            foreach(string item in html.ListOfAttributes())
             {
-                System.Console.WriteLine("{0}={1}", item.Key, item.Value);
+                System.Console.WriteLine(item);
             }
-
-           
-
         }
     }
 }
